@@ -1,0 +1,91 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+enum mdigit {JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC};
+
+struct Weather
+{
+	float rainfall;
+	int hightemperature;
+	int lowtemperature;
+	int avgtemperature;
+};
+
+Weather getItem();
+void display(Weather p);
+void totalRainfall(Weather p[]);
+void print();
+
+
+int main()
+{
+	//Weather month;
+	Weather month[12];
+	const int SIZE = 12;
+	int x = 0;
+	const int size = 12;
+	string date[size] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	print();
+
+	for (int x = 0; x < SIZE; x++){
+		cout << " Enter data for the month of " << date[x] << endl;
+		month[x] = getItem();
+	}
+
+	cout << endl;
+
+	for (int x = 0; x < SIZE; x++){
+		cout << " The data for the month of " << date[x] << endl;
+		display(month[x]);
+	}
+    
+	
+	totalRainfall(month);
+	//print(month, mdigit);
+
+
+	system("pause");
+	return 0;
+}
+void print()
+{
+	cout << JAN << FEB << MAR << endl;
+}
+
+Weather getItem()
+{
+	Weather p;
+	cout << " Enter Data for the monthly total rainfall " << endl;
+	cin >> p.rainfall;
+	cout << " What is the month high temperature " << endl;
+	cin >> p.hightemperature;
+	cout << " What is the month low temperature " << endl;
+	cin >> p.lowtemperature;
+	//cout << " What is the month average temperature " << endl;
+	p.avgtemperature = (p.hightemperature + p.lowtemperature) / 2;
+	cout << endl;
+	return p;
+}
+
+void display(Weather p)
+{
+	cout << " Monthly Rainfall " << p.rainfall << endl;
+	cout << " Monthly temperature " << p.hightemperature << endl;
+	cout << " Month low temperature " << p.lowtemperature << endl;
+	cout << " Month average temperature " << p.avgtemperature << endl;
+	cout << endl;
+}
+
+void totalRainfall(Weather p[])
+{
+	float total=0;
+	int average=0;
+	for (int i = 0; i < 12; i++){
+		total += p[i].rainfall;
+		average += p[i].avgtemperature;
+	}
+	cout << "The average monthly rainfall: " << total/12 << endl;
+	cout << "Total rainfall for the year: " << total << endl;
+	cout << "The average of all monthly temperature: " << average / 12 << endl;
+}
